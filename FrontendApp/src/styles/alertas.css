@@ -1,0 +1,50 @@
+.alertas-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+  
+  .tabla-alertas {
+    margin: 2rem auto;
+    border-collapse: collapse;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tabla-alertas th,
+  .tabla-alertas td {
+    border: 1px solid #ddd;
+    padding: 12px;
+  }
+  
+  .tabla-alertas th {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .tabla-alertas tr:nth-child(even) {
+    background-color: #f8f8f8;
+  }
+  
+  .btn-agregar {
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-agregar:hover {
+    background-color: #218838;
+  }
+  

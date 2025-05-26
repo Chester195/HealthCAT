@@ -1,0 +1,43 @@
+.historial-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+  
+  .tabla-salud {
+    margin: 2rem auto;
+    border-collapse: collapse;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tabla-salud th,
+  .tabla-salud td {
+    border: 1px solid #ddd;
+    padding: 12px;
+  }
+  
+  .tabla-salud th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .tabla-salud tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .grafico-placeholder {
+    margin-top: 2rem;
+    padding: 2rem;
+    border: 2px dashed #bbb;
+    border-radius: 10px;
+    color: #888;
+    font-style: italic;
+  }
+  

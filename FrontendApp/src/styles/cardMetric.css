@@ -1,0 +1,45 @@
+.card-metric {
+    width: 220px;
+    height: 130px;
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+  }
+  
+  .card-metric:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-metric h2 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-metric p {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+  
+  /* Colores personalizados */
+  .card-red {
+    background-color: #dc3545;
+  }
+  
+  .card-orange {
+    background-color: #fd7e14;
+  }
+  
+  .card-blue {
+    background-color: #0d6efd;
+  }
+  
+  .card-green {
+    background-color: #198754;
+  }
+  
