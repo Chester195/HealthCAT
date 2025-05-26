@@ -37,21 +37,5 @@
 ---
 
 ## 🗂️ Estructura del proyecto
-/backend
-├── controllers/
-├── db/
-├── routes/
-├── cert/
-├── exports/
-├── msqttListener.js
-└── server.js
 
-/frontend
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── hooks/
-│ ├── styles/
-│ └── main.jsx
-└── vite.config.js
 
