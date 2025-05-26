@@ -65,7 +65,6 @@
 - El backend también genera alertas automáticas cuando los BPM están fuera de rango o se detectan 10 mediciones normales consecutivas.
 - Desde el frontend se puede solicitar un reporte PDF con todos los datos, generado con jsPDF desde el backend.
 
----
 
 ## 🛠️ Requisitos para correr el proyecto
 
@@ -81,15 +80,17 @@ DB_NAME=
 
 
 ### 💻 Frontend
-```bash
+
 cd frontend
 npm install
 npm run dev
-🧪 Comandos útiles
+
+### 🧪 Comandos útiles
 Iniciar backend
 node server.js         # Servidor API (HTTPS)
 node msqttListener.js  # Listener MQTT
-📥 Exportar PDF
+
+### 📥 Exportar PDF
 Desde la pestaña "Perfil", puedes descargar un PDF con:
 
 Datos personales
@@ -102,12 +103,12 @@ Gráfica del historial
 
 Este documento es generado desde el backend utilizando jsPDF.
 
-👨‍💻 Autor
+### 👨‍💻 Autor
 Christian
 Estudiante de Ingeniería en Software – Universidad Autónoma de Guadalajara
 GitHub: @Chester195
 
-📃 Licencia
+### 📃 Licencia
 Este proyecto es de uso académico y educativo.
 Licencia MIT.
 
