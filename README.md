@@ -37,5 +37,79 @@
 ---
 
 ## 🗂️ Estructura del proyecto
+/backend
+├── controllers/
+├── db/
+├── routes/
+├── cert/
+├── exports/
+├── msqttListener.js
+└── server.js
+
+/frontend
+├── src/
+│ ├── components/
+│ ├── pages/
+│ ├── hooks/
+│ ├── styles/
+│ └── main.jsx
+└── vite.config.js
+
+---
+
+## 📡 Arquitectura y comunicación
+
+- El **ESP8266** envía datos al tópico `sensor/biometrico` del **broker Mosquitto**.
+- El archivo `msqttListener.js` escucha esos datos, los procesa y los guarda en la base de datos.
+- El **frontend en React** se comunica con la **API REST (Express)** a través de HTTPS.
+- El backend también genera alertas automáticas cuando los BPM están fuera de rango o se detectan 10 mediciones normales consecutivas.
+- Desde el frontend se puede solicitar un reporte PDF con todos los datos, generado con jsPDF desde el backend.
+
+---
+
+## 🛠️ Requisitos para correr el proyecto
+
+### 📦 Backend
+- Node.js 18+
+- MySQL (en Clever Cloud o local)
+- Mosquitto broker
+- Archivo `.env` con:
+DB_HOST=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+
+
+### 💻 Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+🧪 Comandos útiles
+Iniciar backend
+node server.js         # Servidor API (HTTPS)
+node msqttListener.js  # Listener MQTT
+📥 Exportar PDF
+Desde la pestaña "Perfil", puedes descargar un PDF con:
+
+Datos personales
+
+Datos de salud
+
+Historial de BPM y SpO₂
+
+Gráfica del historial
+
+Este documento es generado desde el backend utilizando jsPDF.
+
+👨‍💻 Autor
+Christian
+Estudiante de Ingeniería en Software – Universidad Autónoma de Guadalajara
+GitHub: @Chester195
+
+📃 Licencia
+Este proyecto es de uso académico y educativo.
+Licencia MIT.
+
 
 
