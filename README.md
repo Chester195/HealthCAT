@@ -1,116 +1,157 @@
-# 🩺 HealthCAT – Sistema de Monitoreo de Salud en Tiempo Real
+# 🩺 HealthCAT — IoT Health Monitoring System
 
-**HealthCAT** es una aplicación full stack que permite visualizar, registrar y analizar datos biométricos (ritmo cardíaco y SpO₂) obtenidos en tiempo real desde un sensor físico conectado a un ESP8266. Es ideal para monitoreo clínico remoto, bienestar personal o entornos educativos.
+HealthCAT is a full-stack IoT-based health monitoring prototype developed as a collaborative academic project at Universidad Autónoma de Guadalajara.
 
----
+The project explores the integration of embedded hardware, wireless communication, backend services, relational databases, and web technologies to collect and manage biometric information.
 
-## 🚀 Tecnologías utilizadas
+Using an **ESP8266 microcontroller** and a **MAX30102 sensor**, the system detects heartbeats, calculates heart rate (BPM), and transmits measurements through MQTT for integration with a web-based monitoring application.
 
-### 🔧 Backend
-- **Node.js + Express** – API REST segura con certificados SSL.
-- **MySQL (Clever Cloud)** – Base de datos relacional para usuarios, datos de salud, historial y alertas.
-- **MQTT (Mosquitto Broker)** – Comunicación en tiempo real entre el sensor físico y el backend.
-- **jsPDF** – Generación de reportes PDF descargables desde el perfil.
+## 🛠️ Tech Stack
 
-### 🌐 Frontend
-- **React.js + Vite** – Interfaz SPA moderna y rápida.
-- **Axios** – Comunicación con la API.
-- **Chart.js** – Visualización de gráficas de historial.
-- **Bootstrap + CSS personalizado** – Diseño responsive y accesible.
+### Frontend
+- **React.js + Vite** — Web application development
+- **JavaScript, HTML, CSS** — User interface
+- **Bootstrap** — Responsive design
+- **Axios** — HTTP communication
 
-### 🧠 Hardware
-- **ESP8266**
-- **Sensor MAX30102** – Medición de ritmo cardíaco y oxigenación en sangre.
+### Backend
+- **Node.js + Express.js** — REST API
+- **MySQL** — Relational database
+- **MQTT (Mosquitto)** — IoT messaging infrastructure
 
----
+### Hardware & Embedded Development
+- **ESP8266** — Wi-Fi-enabled microcontroller
+- **MAX30102** — Optical heart rate sensor
+- **Arduino IDE / C++** — Firmware development
+- **I²C** — Sensor communication
+- **ArduinoJson** — JSON message serialization
+- **PubSubClient** — MQTT communication
 
-## 📌 Funcionalidades principales
+## ✨ Key Features
 
-✅ Registro e inicio de sesión de usuarios  
-✅ Edición de datos personales y de salud  
-✅ Visualización en tiempo real de BPM y SpO₂  
-✅ Historial detallado de las últimas mediciones  
-✅ Gráfica de tendencias de salud  
-✅ Alertas automáticas por BPM fuera de rango o estabilidad  
-✅ Exportación de reporte PDF completo desde el perfil  
+- **Heart Rate Monitoring:** Detects heartbeats and calculates BPM using the MAX30102 sensor.
+- **Wireless Data Transmission:** Publishes biometric measurements as JSON messages through MQTT.
+- **Measurement Processing:** Calculates an average from six valid BPM readings before transmission.
+- **REST API:** Provides endpoints for registering and retrieving biometric measurements.
+- **Database Integration:** Uses MySQL for biometric data storage.
+- **Web Interface:** Includes React-based pages for monitoring, user profiles, biometric history, and alerts.
+- **Modular Architecture:** Separates embedded firmware, backend services, and frontend components.
 
----
+## 🏗️ System Architecture
 
-## 🗂️ Estructura del proyecto
-/backend
-├── controllers/
-├── db/
-├── routes/
-├── cert/
-├── exports/
-├── msqttListener.js
-└── server.js
+HealthCAT is organized into three main components:
 
-/frontend
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── hooks/
-│ ├── styles/
-│ └── main.jsx
-└── vite.config.js
+### 1. IoT Device
 
----
+The ESP8266 communicates with the MAX30102 sensor through I²C.
 
-## 📡 Arquitectura y comunicación
+The firmware:
+- Connects to a Wi-Fi network.
+- Detects heartbeats using infrared sensor readings.
+- Calculates BPM based on the time between detected beats.
+- Averages six valid measurements.
+- Publishes the results as JSON messages to an MQTT broker.
 
-- El **ESP8266** envía datos al tópico `sensor/biometrico` del **broker Mosquitto**.
-- El archivo `msqttListener.js` escucha esos datos, los procesa y los guarda en la base de datos.
-- El **frontend en React** se comunica con la **API REST (Express)** a través de HTTPS.
-- El backend también genera alertas automáticas cuando los BPM están fuera de rango o se detectan 10 mediciones normales consecutivas.
-- Desde el frontend se puede solicitar un reporte PDF con todos los datos, generado con jsPDF desde el backend.
+### 2. Backend
 
+The Node.js and Express backend provides REST endpoints for handling biometric measurements and integrates with a MySQL database.
 
-## 🛠️ Requisitos para correr el proyecto
+The IoT firmware publishes measurements to the MQTT topic `sensor/biometrico`.
 
-### 📦 Backend
-- Node.js 18+
-- MySQL (en Clever Cloud o local)
-- Mosquitto broker
-- Archivo `.env` con:
-DB_HOST=
-DB_USER=
-DB_PASSWORD=
-DB_NAME=
+### 3. Frontend
 
+The React application provides a web interface with pages for biometric monitoring, user profiles, history, and alerts.
 
-### 💻 Frontend
+### Communication Overview
 
-cd frontend
-npm install
-npm run dev
+```text
+MAX30102 Sensor
+      |
+      | I2C
+      v
+ESP8266 (Arduino / C++)
+      |
+      | Wi-Fi / MQTT
+      v
+Mosquitto MQTT Broker
 
-### 🧪 Comandos útiles
-Iniciar backend
-node server.js         # Servidor API (HTTPS)
-node msqttListener.js  # Listener MQTT
+Node.js / Express REST API
+      |
+      v
+MySQL Database
 
-### 📥 Exportar PDF
-Desde la pestaña "Perfil", puedes descargar un PDF con:
+React + Vite Web Application
+```
 
-Datos personales
+The MQTT publisher, REST API, database integration, and React interface are included as components of the academic prototype. The complete MQTT-to-database processing pipeline is not included in the currently available backend source.
 
-Datos de salud
+## 📁 Project Structure
 
-Historial de BPM y SpO₂
+```text
+HealthCAT/
+├── backend/
+│   ├── controllers/
+│   ├── db/
+│   ├── routes/
+│   └── server.js
+│
+├── FrontendApp/
+│   └── src/
+│       ├── components/
+│       └── pages/
+│
+└── firmware/
+    └── healthcat_esp8266.ino
+```
 
-Gráfica del historial
+*The firmware directory represents the suggested organization for including the Arduino source code in the repository.*
 
-Este documento es generado desde el backend utilizando jsPDF.
+## 👥 Team & Contributions
 
-### 👨‍💻 Autor
-Christian
-Estudiante de Ingeniería en Software – Universidad Autónoma de Guadalajara
-GitHub: @Chester195
+HealthCAT was developed as a collaborative academic project.
 
-### 📃 Licencia
-Este proyecto es de uso académico y educativo.
-Licencia MIT.
+### My Contributions — Software Development & IoT Integration
 
+I was primarily responsible for the software implementation and hardware integration, including:
 
+- Developing the React frontend and Node.js backend functionality.
+- Programming the ESP8266 microcontroller using Arduino IDE and C++.
+- Integrating the MAX30102 sensor for heartbeat detection and BPM calculation.
+- Implementing MQTT-based transmission of biometric measurements.
+- Developing REST API functionality for biometric data management.
+- Integrating the application's software and hardware components.
 
+### Other Team Contributions
+
+- **Database Development:** A team member was responsible for the database design and implementation.
+- **Academic Documentation:** Another team member handled academic reports and project documentation.
+
+## 🎯 Learning Outcomes
+
+This project provided practical experience in:
+
+- Full-stack application development.
+- RESTful API implementation.
+- Embedded programming with C++.
+- Hardware-software integration.
+- MQTT-based communication.
+- JSON data serialization.
+- Relational database integration.
+- Collaborative software development.
+
+## ⚠️ Limitations & Disclaimer
+
+- HealthCAT was developed as an academic prototype, not a production-ready application.
+- The available ESP8266 firmware calculates heart rate (BPM). Although the MAX30102 supports optical measurements used in SpO₂ estimation, SpO₂ calculation is not implemented in this firmware version.
+- Some web interface features use demonstration data.
+- The project has not been validated for clinical use.
+
+**HealthCAT is not a certified medical device and should not be used for medical diagnosis, treatment, or clinical decision-making.**
+
+## 👨‍💻 Developer
+
+**Christian Ojeda**  
+Software Engineering Student  
+Universidad Autónoma de Guadalajara
+
+**GitHub:** [@Chester195](https://github.com/Chester195)
